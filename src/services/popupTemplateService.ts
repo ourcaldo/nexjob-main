@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import { PopupTemplate } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
+import { PopupTemplate } from '@/lib/db-client';
 
 class PopupTemplateService {
   // Get popup template by key

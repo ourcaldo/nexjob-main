@@ -1,9 +1,8 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createServerSupabaseClient } from '@/lib/supabase';
+import { query } from '@/lib/database';
+import { validateSessionToken } from '@/lib/auth';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const supabase = createServerSupabaseClient();
-
   try {
     // Get user from Authorization header
     const token = req.headers.authorization?.replace('Bearer ', '');
@@ -12,7 +11,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       return res.status(401).json({ success: false, error: 'No authorization token provided' });
     }
 
-    const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+    // Validate token and get user
+    const { user, error: authError } = await validateSessionToken(token);
 
     if (authError || !user) {
       return res.status(401).json({ success: false, error: 'Invalid or expired token' });
@@ -20,18 +20,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     if (req.method === 'GET') {
       // Get user bookmarks
-      const { data, error } = await supabase
-        .from('user_bookmarks')
-        .select('*')
-        .eq('user_id', user.id)
-        .order('created_at', { ascending: false });
+      const result = await query(
+        `SELECT * FROM user_bookmarks 
+         WHERE user_id = $1 
+         ORDER BY created_at DESC`,
+        [user.id]
+      );
 
-      if (error) {
-        console.error('Error fetching user bookmarks:', error);
-        return res.status(500).json({ success: false, error: 'Failed to fetch bookmarks' });
-      }
-
-      return res.status(200).json({ success: true, data: data || [] });
+      return res.status(200).json({ success: true, data: result.rows || [] });
     }
 
     if (req.method === 'POST') {
@@ -42,19 +38,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ success: false, error: 'Job ID is required' });
       }
 
-      const { error } = await supabase
-        .from('user_bookmarks')
-        .insert({
-          user_id: user.id,
-          job_id: jobId
-        });
+      try {
+        await query(
+          `INSERT INTO user_bookmarks (user_id, job_id, created_at)
+           VALUES ($1, $2, NOW())
+           ON CONFLICT (user_id, job_id) DO NOTHING`,
+          [user.id, jobId]
+        );
 
-      if (error) {
+        return res.status(200).json({ success: true });
+      } catch (error: any) {
         console.error('Error adding bookmark:', error);
         return res.status(500).json({ success: false, error: 'Failed to add bookmark' });
       }
-
-      return res.status(200).json({ success: true });
     }
 
     if (req.method === 'DELETE') {
@@ -65,18 +61,18 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(400).json({ success: false, error: 'Job ID is required' });
       }
 
-      const { error } = await supabase
-        .from('user_bookmarks')
-        .delete()
-        .eq('user_id', user.id)
-        .eq('job_id', jobId);
+      try {
+        await query(
+          `DELETE FROM user_bookmarks 
+           WHERE user_id = $1 AND job_id = $2`,
+          [user.id, jobId]
+        );
 
-      if (error) {
+        return res.status(200).json({ success: true });
+      } catch (error: any) {
         console.error('Error removing bookmark:', error);
         return res.status(500).json({ success: false, error: 'Failed to remove bookmark' });
       }
-
-      return res.status(200).json({ success: true });
     }
 
     return res.status(405).json({ success: false, error: 'Method not allowed' });

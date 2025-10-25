@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { MapPin, Clock, Briefcase, GraduationCap, ExternalLink, Building, Bookmark, EyeOff, Flame } from 'lucide-react';
 import { Job } from '@/types/job';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { userBookmarkService } from '@/services/userBookmarkService';
 import { useToast } from '@/components/ui/ToastProvider';
 import BookmarkLoginModal from '@/components/ui/BookmarkLoginModal';

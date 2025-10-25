@@ -1,4 +1,4 @@
-import { supabase, createServerSupabaseClient, AdminSettings, Profile } from '@/lib/supabase';
+import { supabase, createServerSupabaseClient, AdminSettings, Profile } from '@/lib/db-client';
 import { env } from '@/lib/env';
 
 export class SupabaseAdminService {

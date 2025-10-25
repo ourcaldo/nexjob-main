@@ -1,5 +1,5 @@
 import { Job } from '@/types/job';
-import { AdminSettings, NxdbPage } from '@/lib/supabase';
+import { AdminSettings, NxdbPage } from '@/lib/db-client';
 import { getCurrentDomain } from '@/lib/env';
 
 export const generateWebsiteSchema = (settings: AdminSettings) => {

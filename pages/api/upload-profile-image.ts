@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createServerSupabaseClient } from '@/lib/supabase';
+import { createServerSupabaseClient } from '@/lib/db-client';
 import { supabaseStorageService } from '@/services/supabaseStorageService';
 import formidable from 'formidable';
 import fs from 'fs';

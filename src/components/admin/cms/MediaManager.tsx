@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { X, Upload, Loader2, Check, Trash2, Search } from 'lucide-react';
 import { supabaseStorageService } from '@/services/supabaseStorageService';
-import { supabase, NxdbMedia } from '@/lib/supabase';
+import { supabase, NxdbMedia } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 
 type MediaItem = NxdbMedia;

@@ -4,7 +4,7 @@ import { Search, Filter, X, Loader2, AlertCircle } from 'lucide-react';
 import { Job } from '@/types/job';
 import { wpService, FilterData } from '@/services/wpService';
 import { userBookmarkService } from '@/services/userBookmarkService';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import JobCard from '@/components/JobCard';
 import JobSidebar from '@/components/JobSidebar';

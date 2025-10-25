@@ -1,5 +1,5 @@
-import { Profile } from '@/lib/supabase';
-import { supabase } from '@/lib/supabase';
+import { Profile } from '@/lib/db-client';
+import { supabase } from '@/lib/db-client';
 
 export interface UserProfileResponse {
   success: boolean;

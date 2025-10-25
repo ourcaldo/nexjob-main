@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import { NxdbArticle, NxdbArticleCategory, NxdbArticleTag } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
+import { NxdbArticle, NxdbArticleCategory, NxdbArticleTag } from '@/lib/db-client';
 
 export interface CreateArticleData {
   title: string;

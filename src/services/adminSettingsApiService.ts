@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import type { AdminSettings } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
+import type { AdminSettings } from '@/lib/db-client';
 
 export class AdminSettingsApiService {
   private baseUrl = '/api/admin/settings/';

@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import { NxdbPage, NxdbPageCategory, NxdbPageTag } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
+import { NxdbPage, NxdbPageCategory, NxdbPageTag } from '@/lib/db-client';
 
 export interface CreatePageData {
   title: string;

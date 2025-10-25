@@ -2,7 +2,7 @@
 export const debugAuth = async () => {
   if (typeof window === 'undefined') return;
   
-  const { supabase } = await import('@/lib/supabase');
+  const { supabase } = await import('@/lib/db-client');
   
   console.group('🔐 Auth Debug Info');
   

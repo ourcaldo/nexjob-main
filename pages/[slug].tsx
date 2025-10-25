@@ -2,7 +2,7 @@ import { GetStaticProps, GetStaticPaths } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { cmsPageService } from '@/services/cmsPageService';
-import { NxdbPage } from '@/lib/supabase';
+import { NxdbPage } from '@/lib/db-client';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import SchemaMarkup from '@/components/SEO/SchemaMarkup';

@@ -4,7 +4,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
 import { cmsArticleService } from '@/services/cmsArticleService';
-import { NxdbArticle } from '@/lib/supabase';
+import { NxdbArticle } from '@/lib/db-client';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import SchemaMarkup from '@/components/SEO/SchemaMarkup';

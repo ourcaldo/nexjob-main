@@ -18,7 +18,7 @@ import { cmsArticleService, CreateArticleData, UpdateArticleData } from '@/servi
 import { cmsPageService, CreatePageData, UpdatePageData } from '@/services/cmsPageService';
 import { supabaseAdminService } from '@/services/supabaseAdminService';
 import { supabaseStorageService } from '@/services/supabaseStorageService';
-import { NxdbArticle, NxdbPage, NxdbArticleCategory, NxdbArticleTag, NxdbPageCategory, NxdbPageTag } from '@/lib/supabase';
+import { NxdbArticle, NxdbPage, NxdbArticleCategory, NxdbArticleTag, NxdbPageCategory, NxdbPageTag } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 import TiptapEditor from './TiptapEditor';
 import MediaManager from './MediaManager';

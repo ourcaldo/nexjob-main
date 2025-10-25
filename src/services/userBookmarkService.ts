@@ -1,5 +1,5 @@
-import { supabase } from '@/lib/supabase';
-import { UserBookmark } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
+import { UserBookmark } from '@/lib/db-client';
 
 class UserBookmarkService {
   private async getAuthToken(): Promise<string | null> {
@@ -15,7 +15,7 @@ class UserBookmarkService {
   // Get user bookmarks using API layer
   async getUserBookmarks(userId: string): Promise<UserBookmark[]> {
     try {
-      const { getCachedAuthState } = await import('@/lib/supabase');
+      const { getCachedAuthState } = await import('@/lib/db-client');
       const { session } = await getCachedAuthState();
       if (!session?.user || session.user.id !== userId) {
         throw new Error('Unauthorized');
@@ -218,7 +218,7 @@ class UserBookmarkService {
   // Toggle bookmark
   async toggleBookmark(jobId: string): Promise<{ success: boolean; isBookmarked: boolean; error?: string }> {
     try {
-      const { getCachedAuthState } = await import('@/lib/supabase');
+      const { getCachedAuthState } = await import('@/lib/db-client');
       const { session } = await getCachedAuthState();
       const user = session?.user;
 

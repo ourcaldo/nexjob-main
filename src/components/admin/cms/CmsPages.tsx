@@ -21,7 +21,7 @@ import {
 } from 'lucide-react';
 import { cmsPageService } from '@/services/cmsPageService';
 import { cmsArticleService } from '@/services/cmsArticleService';
-import { NxdbPage, NxdbArticle } from '@/lib/supabase';
+import { NxdbPage, NxdbArticle } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 import { formatDistance } from 'date-fns';
 import Link from 'next/link';

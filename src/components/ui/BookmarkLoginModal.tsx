@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { X, User, Mail } from 'lucide-react';
 import { popupTemplateService } from '@/services/popupTemplateService';
-import { PopupTemplate } from '@/lib/supabase';
+import { PopupTemplate } from '@/lib/db-client';
 
 interface BookmarkLoginModalProps {
   isOpen: boolean;

@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { useState, useEffect } from 'react';
 import { cmsArticleService } from '@/services/cmsArticleService';
 import { supabaseAdminService } from '@/services/supabaseAdminService';
-import { NxdbArticle, NxdbArticleCategory } from '@/lib/supabase';
+import { NxdbArticle, NxdbArticleCategory } from '@/lib/db-client';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';
 import SchemaMarkup from '@/components/SEO/SchemaMarkup';

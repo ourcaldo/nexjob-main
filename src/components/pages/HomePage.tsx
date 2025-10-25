@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { Search, TrendingUp, ArrowRight, Users, Building, Code, Heart, Calculator, Truck, Briefcase } from 'lucide-react';
 import { wpService, FilterData } from '@/services/wpService';
 import { userBookmarkService } from '@/services/userBookmarkService';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { adminService } from '@/services/adminService';
 import SearchableSelect from '@/components/SearchableSelect';
 import SchemaMarkup from '@/components/SEO/SchemaMarkup';

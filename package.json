@@ -14,6 +14,7 @@
   "dependencies": {
     "@aws-sdk/client-s3": "^3.917.0",
     "@aws-sdk/s3-request-presigner": "^3.917.0",
+    "@neondatabase/serverless": "^1.0.2",
     "@supabase/supabase-js": "^2.76.1",
     "@tiptap/extension-blockquote": "^2.26.4",
     "@tiptap/extension-bold": "^2.26.4",
@@ -34,10 +35,13 @@
     "@tiptap/react": "^2.26.4",
     "@tiptap/starter-kit": "^2.26.4",
     "@types/formidable": "^3.4.6",
+    "@types/pg": "^8.15.5",
     "date-fns": "^4.1.0",
+    "dotenv": "^17.2.3",
     "formidable": "^3.5.4",
     "lucide-react": "^0.344.0",
     "next": "^14.2.33",
+    "pg": "^8.16.3",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },

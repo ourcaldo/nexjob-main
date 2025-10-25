@@ -1,12 +1,11 @@
 import { NextApiRequest, NextApiResponse } from 'next';
-import { createServerSupabaseClient } from '@/lib/supabase';
-import type { AdminSettings } from '@/lib/supabase';
+import { query } from '@/lib/database';
+import { validateSessionToken, isSuperAdmin } from '@/lib/auth';
+import type { AdminSettings } from '@/lib/database';
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
-  const supabase = createServerSupabaseClient();
-
   // Authentication check
-  const authResult = await checkAuthentication(req, supabase);
+  const authResult = await checkAuthentication(req);
   if (!authResult.success) {
     return res.status(401).json({ error: authResult.error });
   }
@@ -14,10 +13,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   try {
     switch (req.method) {
       case 'GET':
-        return handleGet(supabase, res);
+        return handleGet(res);
       case 'POST':
       case 'PUT':
-        return handleUpdate(supabase, req, res);
+        return handleUpdate(req, res);
       default:
         return res.status(405).json({ error: 'Method not allowed' });
     }
@@ -27,24 +26,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 }
 
-async function handleGet(supabase: any, res: NextApiResponse) {
+async function handleGet(res: NextApiResponse) {
   try {
-    const { data, error } = await supabase
-      .from('admin_settings')
-      .select('*')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+    const result = await query(
+      `SELECT * FROM admin_settings 
+       ORDER BY created_at DESC 
+       LIMIT 1`
+    );
 
-    if (error && error.code !== 'PGRST116') {
-      console.error('Error fetching admin settings:', error);
-      return res.status(500).json({ error: 'Failed to fetch settings' });
-    }
-
-    // If no settings found, return null (client will use defaults)
-    if (!data || error?.code === 'PGRST116') {
-      return res.status(200).json({ data: null });
-    }
+    const data = result.rows[0] || null;
 
     return res.status(200).json({ data });
   } catch (error) {
@@ -53,7 +43,7 @@ async function handleGet(supabase: any, res: NextApiResponse) {
   }
 }
 
-async function handleUpdate(supabase: any, req: NextApiRequest, res: NextApiResponse) {
+async function handleUpdate(req: NextApiRequest, res: NextApiResponse) {
   try {
     const settings = req.body;
 
@@ -62,44 +52,47 @@ async function handleUpdate(supabase: any, req: NextApiRequest, res: NextApiResp
     }
 
     // Get existing settings
-    const { data: existingSettings } = await supabase
-      .from('admin_settings')
-      .select('id')
-      .order('created_at', { ascending: false })
-      .limit(1)
-      .single();
+    const existingResult = await query(
+      `SELECT id FROM admin_settings 
+       ORDER BY created_at DESC 
+       LIMIT 1`
+    );
+
+    const existingSettings = existingResult.rows[0];
 
     let result;
     if (existingSettings?.id) {
       // Update existing settings
-      result = await supabase
-        .from('admin_settings')
-        .update({
-          ...settings,
-          updated_at: new Date().toISOString()
-        })
-        .eq('id', existingSettings.id)
-        .select()
-        .single();
+      const keys = Object.keys(settings);
+      const setClause = keys.map((key, i) => `${key} = $${i + 1}`).join(', ');
+      const values = Object.values(settings);
+
+      result = await query(
+        `UPDATE admin_settings 
+         SET ${setClause}, updated_at = NOW() 
+         WHERE id = $${keys.length + 1} 
+         RETURNING *`,
+        [...values, existingSettings.id]
+      );
     } else {
       // Insert new settings
-      result = await supabase
-        .from('admin_settings')
-        .insert({
-          ...settings,
-          created_at: new Date().toISOString(),
-          updated_at: new Date().toISOString()
-        })
-        .select()
-        .single();
+      const keys = Object.keys(settings);
+      const placeholders = keys.map((_, i) => `$${i + 1}`).join(', ');
+      const values = Object.values(settings);
+
+      result = await query(
+        `INSERT INTO admin_settings (${keys.join(', ')}, created_at, updated_at)
+         VALUES (${placeholders}, NOW(), NOW())
+         RETURNING *`,
+        values
+      );
     }
 
-    if (result.error) {
-      console.error('Error saving admin settings:', result.error);
+    if (!result.rows[0]) {
       return res.status(500).json({ error: 'Failed to save settings' });
     }
 
-    return res.status(200).json({ data: result.data, success: true });
+    return res.status(200).json({ data: result.rows[0], success: true });
   } catch (error) {
     console.error('Error in handleUpdate:', error);
     return res.status(500).json({ error: 'Failed to update settings' });
@@ -107,7 +100,7 @@ async function handleUpdate(supabase: any, req: NextApiRequest, res: NextApiResp
 }
 
 // Authentication check function
-async function checkAuthentication(req: NextApiRequest, supabase: any): Promise<{ success: boolean; error?: string }> {
+async function checkAuthentication(req: NextApiRequest): Promise<{ success: boolean; error?: string }> {
   // Method 1: Check for API token in headers
   const apiToken = req.headers.authorization?.replace('Bearer ', '') || req.headers['x-api-token'];
   const validToken = process.env.API_TOKEN;
@@ -116,26 +109,22 @@ async function checkAuthentication(req: NextApiRequest, supabase: any): Promise<
     return { success: true };
   }
 
-  // Method 2: Check for Supabase session token and verify super admin role
+  // Method 2: Check for session token and verify super admin role
   const sessionToken = req.headers.authorization?.replace('Bearer ', '');
   
   if (sessionToken && sessionToken !== validToken) {
     try {
-      // Verify the session token with Supabase
-      const { data: { user }, error: authError } = await supabase.auth.getUser(sessionToken);
+      // Validate the session token
+      const { user, error: authError } = await validateSessionToken(sessionToken);
       
       if (authError || !user) {
         return { success: false, error: 'Invalid session token' };
       }
 
       // Check if user is super admin
-      const { data: profile, error: profileError } = await supabase
-        .from('profiles')
-        .select('role')
-        .eq('id', user.id)
-        .single();
+      const isAdmin = await isSuperAdmin(user.id);
 
-      if (profileError || !profile || profile.role !== 'super_admin') {
+      if (!isAdmin) {
         return { success: false, error: 'Unauthorized: Super admin access required' };
       }
 

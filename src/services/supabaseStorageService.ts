@@ -1,4 +1,4 @@
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 
 export interface UploadResponse {
   success: boolean;

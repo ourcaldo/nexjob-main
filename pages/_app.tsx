@@ -2,7 +2,7 @@ import type { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import GoogleAnalytics from '@/components/Analytics/GoogleAnalytics';
 import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/Analytics/GoogleTagManager';
 import { ToastProvider } from '@/components/ui/ToastProvider';
@@ -55,7 +55,7 @@ export default function App({ Component, pageProps }: AppProps) {
       console.log('Global auth state change:', event, session?.user?.id);
       
       // Clear auth cache on state changes
-      const { clearAuthCache } = await import('@/lib/supabase');
+      const { clearAuthCache } = await import('@/lib/db-client');
       clearAuthCache();
       
       // Dispatch auth state change event

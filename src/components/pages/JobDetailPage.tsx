@@ -20,7 +20,7 @@ import { Job } from '@/types/job';
 import { wpService } from '@/services/wpService';
 import { bookmarkService } from '@/services/bookmarkService';
 import { userBookmarkService } from '@/services/userBookmarkService';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { useAnalytics } from '@/hooks/useAnalytics';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import JobCard from '@/components/JobCard';

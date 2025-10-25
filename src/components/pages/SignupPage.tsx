@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Eye, EyeOff, Mail, Lock, User, Loader2, AlertCircle, CheckCircle } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 import Header from '@/components/Layout/Header';
 import Footer from '@/components/Layout/Footer';

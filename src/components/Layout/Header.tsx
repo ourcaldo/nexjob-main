@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { Search, User, Bookmark, Menu, X, LogOut, Settings } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 
 // Debug utility for development
@@ -81,7 +81,7 @@ const Header: React.FC = () => {
       }
       
       // Use cached auth state for better performance
-      const { getCachedAuthState } = await import('@/lib/supabase');
+      const { getCachedAuthState } = await import('@/lib/db-client');
       const { session, error } = await getCachedAuthState();
       
       if (error) {
@@ -233,7 +233,7 @@ const Header: React.FC = () => {
     let currentUser = user;
     if (!currentUser && !isLoading) {
       try {
-        const { getCachedAuthState } = await import('@/lib/supabase');
+        const { getCachedAuthState } = await import('@/lib/db-client');
         const { session } = await getCachedAuthState();
         currentUser = session?.user;
       } catch (error) {

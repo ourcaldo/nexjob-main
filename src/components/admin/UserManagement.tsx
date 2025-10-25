@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Users, Search, Filter, MoreVertical, Shield, User, Mail, Calendar } from 'lucide-react';
-import { supabase } from '@/lib/supabase';
+import { supabase } from '@/lib/db-client';
 import { useToast } from '@/components/ui/ToastProvider';
 
 interface UserProfile {
