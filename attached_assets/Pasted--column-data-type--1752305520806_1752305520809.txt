@@ -1,0 +1,150 @@
+
+| column                                            | data_type                |
+| ------------------------------------------------- | ------------------------ |
+| admin_settings.id                                 | integer                  |
+| admin_settings.api_url                            | text                     |
+| admin_settings.wp_jobs_api_url                    | text                     |
+| admin_settings.wp_posts_api_url                   | text                     |
+| admin_settings.filters_api_url                    | text                     |
+| admin_settings.auth_token                         | text                     |
+| admin_settings.wp_auth_token                      | text                     |
+| admin_settings.site_title                         | text                     |
+| admin_settings.site_tagline                       | text                     |
+| admin_settings.site_description                   | text                     |
+| admin_settings.site_url                           | text                     |
+| admin_settings.ga_id                              | text                     |
+| admin_settings.gtm_id                             | text                     |
+| admin_settings.jobs_title                         | text                     |
+| admin_settings.jobs_description                   | text                     |
+| admin_settings.jobs_og_image                      | text                     |
+| admin_settings.articles_title                     | text                     |
+| admin_settings.articles_description               | text                     |
+| admin_settings.articles_og_image                  | text                     |
+| admin_settings.default_article_og_image           | text                     |
+| admin_settings.default_job_og_image               | text                     |
+| admin_settings.home_og_image                      | text                     |
+| admin_settings.category_page_title_template       | text                     |
+| admin_settings.category_page_description_template | text                     |
+| admin_settings.location_page_title_template       | text                     |
+| admin_settings.location_page_description_template | text                     |
+| admin_settings.login_page_title                   | text                     |
+| admin_settings.login_page_description             | text                     |
+| admin_settings.signup_page_title                  | text                     |
+| admin_settings.signup_page_description            | text                     |
+| admin_settings.profile_page_title                 | text                     |
+| admin_settings.profile_page_description           | text                     |
+| admin_settings.robots_txt                         | text                     |
+| admin_settings.sitemap_update_interval            | integer                  |
+| admin_settings.last_sitemap_update                | timestamp with time zone |
+| admin_settings.auto_generate_sitemap              | boolean                  |
+| admin_settings.supabase_storage_access_key        | text                     |
+| admin_settings.supabase_storage_secret_key        | text                     |
+| admin_settings.supabase_storage_endpoint          | text                     |
+| admin_settings.supabase_storage_region            | text                     |
+| admin_settings.created_at                         | timestamp with time zone |
+| admin_settings.updated_at                         | timestamp with time zone |
+| admin_settings.popup_ad_code                      | text                     |
+| admin_settings.sidebar_archive_ad_code            | text                     |
+| admin_settings.sidebar_single_ad_code             | text                     |
+| admin_settings.single_top_ad_code                 | text                     |
+| admin_settings.single_bottom_ad_code              | text                     |
+| admin_settings.single_middle_ad_code              | text                     |
+| nxdb_article_categories.id                        | uuid                     |
+| nxdb_article_categories.name                      | text                     |
+| nxdb_article_categories.slug                      | text                     |
+| nxdb_article_categories.description               | text                     |
+| nxdb_article_categories.created_at                | timestamp with time zone |
+| nxdb_article_categories.updated_at                | timestamp with time zone |
+| nxdb_article_category_relations.id                | uuid                     |
+| nxdb_article_category_relations.article_id        | uuid                     |
+| nxdb_article_category_relations.category_id       | uuid                     |
+| nxdb_article_category_relations.created_at        | timestamp with time zone |
+| nxdb_article_tag_relations.id                     | uuid                     |
+| nxdb_article_tag_relations.article_id             | uuid                     |
+| nxdb_article_tag_relations.tag_id                 | uuid                     |
+| nxdb_article_tag_relations.created_at             | timestamp with time zone |
+| nxdb_article_tags.id                              | uuid                     |
+| nxdb_article_tags.name                            | text                     |
+| nxdb_article_tags.slug                            | text                     |
+| nxdb_article_tags.created_at                      | timestamp with time zone |
+| nxdb_article_tags.updated_at                      | timestamp with time zone |
+| nxdb_articles.id                                  | uuid                     |
+| nxdb_articles.title                               | text                     |
+| nxdb_articles.slug                                | text                     |
+| nxdb_articles.content                             | text                     |
+| nxdb_articles.excerpt                             | text                     |
+| nxdb_articles.status                              | character varying        |
+| nxdb_articles.author_id                           | uuid                     |
+| nxdb_articles.featured_image                      | text                     |
+| nxdb_articles.seo_title                           | text                     |
+| nxdb_articles.meta_description                    | text                     |
+| nxdb_articles.schema_types                        | ARRAY                    |
+| nxdb_articles.post_date                           | timestamp with time zone |
+| nxdb_articles.published_at                        | timestamp with time zone |
+| nxdb_articles.created_at                          | timestamp with time zone |
+| nxdb_articles.updated_at                          | timestamp with time zone |
+| nxdb_media.id                                     | uuid                     |
+| nxdb_media.user_id                                | uuid                     |
+| nxdb_media.url                                    | text                     |
+| nxdb_media.name                                   | text                     |
+| nxdb_media.path                                   | text                     |
+| nxdb_media.size                                   | bigint                   |
+| nxdb_media.mime_type                              | text                     |
+| nxdb_media.created_at                             | timestamp with time zone |
+| nxdb_media.updated_at                             | timestamp with time zone |
+| nxdb_page_categories.id                           | uuid                     |
+| nxdb_page_categories.name                         | text                     |
+| nxdb_page_categories.slug                         | text                     |
+| nxdb_page_categories.description                  | text                     |
+| nxdb_page_categories.created_at                   | timestamp with time zone |
+| nxdb_page_categories.updated_at                   | timestamp with time zone |
+| nxdb_page_category_relations.id                   | uuid                     |
+| nxdb_page_category_relations.page_id              | uuid                     |
+| nxdb_page_category_relations.category_id          | uuid                     |
+| nxdb_page_category_relations.created_at           | timestamp with time zone |
+| nxdb_page_tag_relations.id                        | uuid                     |
+| nxdb_page_tag_relations.page_id                   | uuid                     |
+| nxdb_page_tag_relations.tag_id                    | uuid                     |
+| nxdb_page_tag_relations.created_at                | timestamp with time zone |
+| nxdb_page_tags.id                                 | uuid                     |
+| nxdb_page_tags.name                               | text                     |
+| nxdb_page_tags.slug                               | text                     |
+| nxdb_page_tags.created_at                         | timestamp with time zone |
+| nxdb_pages.id                                     | uuid                     |
+| nxdb_pages.title                                  | text                     |
+| nxdb_pages.slug                                   | text                     |
+| nxdb_pages.content                                | text                     |
+| nxdb_pages.excerpt                                | text                     |
+| nxdb_pages.status                                 | text                     |
+| nxdb_pages.author_id                              | uuid                     |
+| nxdb_pages.featured_image                         | text                     |
+| nxdb_pages.seo_title                              | text                     |
+| nxdb_pages.meta_description                       | text                     |
+| nxdb_pages.schema_types                           | ARRAY                    |
+| nxdb_pages.post_date                              | timestamp with time zone |
+| nxdb_pages.published_at                           | timestamp with time zone |
+| nxdb_pages.created_at                             | timestamp with time zone |
+| nxdb_pages.updated_at                             | timestamp with time zone |
+| popup_templates.id                                | uuid                     |
+| popup_templates.template_key                      | text                     |
+| popup_templates.title                             | text                     |
+| popup_templates.content                           | text                     |
+| popup_templates.button_text                       | text                     |
+| popup_templates.created_at                        | timestamp with time zone |
+| popup_templates.updated_at                        | timestamp with time zone |
+| profiles.id                                       | uuid                     |
+| profiles.email                                    | text                     |
+| profiles.full_name                                | text                     |
+| profiles.phone                                    | text                     |
+| profiles.birth_date                               | date                     |
+| profiles.gender                                   | text                     |
+| profiles.location                                 | text                     |
+| profiles.photo_url                                | text                     |
+| profiles.bio                                      | text                     |
+| profiles.role                                     | text                     |
+| profiles.created_at                               | timestamp with time zone |
+| user_bookmarks.id                                 | uuid                     |
+| user_bookmarks.user_id                            | uuid                     |
+| user_bookmarks.job_id                             | text                     |
+| user_bookmarks.created_at                         | timestamp with time zone |
+

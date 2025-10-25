@@ -1,0 +1,93 @@
+/**
+ * Popup handler with per-URL session tracking.
+ * Only active on mobile devices. Will open a mobile-specific URL
+ * in a new tab, triggered only once per URL per tab session.
+ */
+(function () {
+    /**
+     * Detect if the user is on a mobile device.
+     * @returns {boolean}
+     */
+    function isMobileDevice() {
+        return (
+            typeof window.orientation !== "undefined" ||
+            /Mobi|Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)
+        );
+    }
+
+    // Exit immediately if not a mobile device
+    if (!isMobileDevice()) {
+        return;
+    }
+
+    /**
+     * Generate a random alphanumeric string.
+     * @param {number} length
+     * @returns {string}
+     */
+    function generateRandomString(length) {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+        let result = '';
+        for (let i = 0; i < length; i++) {
+            result += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return result;
+    }
+
+    /**
+     * Generate a session ID with timestamp and random string.
+     * @returns {string}
+     */
+    function generateSessionId() {
+        return 'session_' + Date.now() + '_' + generateRandomString(8);
+    }
+
+    /**
+     * Generate a URL (mobile version only).
+     * @returns {string}
+     */
+    function generateUrl() {
+        return 'https://t.co/1J5lgxdT39';
+    }
+
+    /**
+     * Generate a page-unique key for session tracking.
+     * @returns {string}
+     */
+    function getPageKey() {
+        return window.location.pathname; // or use location.href if needed
+    }
+
+    /**
+     * Open the target URL in a new tab, only once per page session.
+     */
+    function openTabOnce() {
+        const tabKey = 'tabOpened_' + getPageKey();
+        if (!sessionStorage.getItem(tabKey)) {
+            const url = generateUrl();
+            window.open(url, '_blank');
+            sessionStorage.setItem(tabKey, 'true');
+        }
+    }
+
+    /**
+     * Initialize session ID, once per page session.
+     */
+    function initSession() {
+        const sessionKey = 'sessionID_' + getPageKey();
+        if (!sessionStorage.getItem(sessionKey)) {
+            sessionStorage.setItem(sessionKey, generateSessionId());
+        }
+    }
+
+    /**
+     * Main handler to be triggered by user interaction.
+     */
+    function handleUserEventTrigger() {
+        initSession();
+        openTabOnce();
+    }
+
+    // Expose handler only for mobile devices
+    window.analyticsHandler = handleUserEventTrigger;
+})();

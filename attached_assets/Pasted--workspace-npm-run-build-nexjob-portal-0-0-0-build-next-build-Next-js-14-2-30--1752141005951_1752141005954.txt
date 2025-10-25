@@ -1,0 +1,32 @@
+~/workspace$ npm run build
+
+> nexjob-portal@0.0.0 build
+> next build
+
+  ▲ Next.js 14.2.30
+  - Environments: .env.local, .env
+
+
+./src/components/admin/SEOSettings.tsx
+332:13  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+   Linting and checking validity of types  ..Failed to compile.
+
+./src/components/pages/ProfilePage.tsx:168:18
+Type error: Argument of type '(prev: Profile | null) => { photo_url: string | null | undefined; id: string; email: string; full_name?: string | undefined; phone?: string | undefined; birth_date?: string | undefined; ... 4 more ...; created_at: string; } | null' is not assignable to parameter of type 'SetStateAction<Profile | null>'.
+  Type '(prev: Profile | null) => { photo_url: string | null | undefined; id: string; email: string; full_name?: string | undefined; phone?: string | undefined; birth_date?: string | undefined; ... 4 more ...; created_at: string; } | null' is not assignable to type '(prevState: Profile | null) => Profile | null'.
+    Type '{ photo_url: string | null | undefined; id: string; email: string; full_name?: string | undefined; phone?: string | undefined; birth_date?: string | undefined; gender?: "male" | "female" | "other" | undefined; location?: string | undefined; bio?: string | undefined; role: "user" | "super_admin"; created_at: string; ...' is not assignable to type 'Profile | null'.
+      Type '{ photo_url: string | null | undefined; id: string; email: string; full_name?: string; phone?: string; birth_date?: string; gender?: "male" | "female" | "other"; location?: string; bio?: string; role: "user" | "super_admin"; created_at: string; }' is not assignable to type 'Profile'.
+        Types of property 'photo_url' are incompatible.
+          Type 'string | null | undefined' is not assignable to type 'string | undefined'.
+            Type 'null' is not assignable to type 'string | undefined'.
+
+  166 |       }
+  167 |
+> 168 |       setProfile(prev => prev ? { ...prev, photo_url: result.url } : null);
+      |                  ^
+  169 |       showToast('success', 'Foto profil berhasil diperbarui');
+  170 |     } catch (error) {
+  171 |       console.error('Error uploading image:', error);
+Next.js build worker exited with code: 1 and signal: null

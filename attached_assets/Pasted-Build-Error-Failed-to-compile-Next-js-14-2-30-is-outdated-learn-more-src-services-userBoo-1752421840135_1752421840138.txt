@@ -1,0 +1,56 @@
+Build Error
+Failed to compile
+
+Next.js (14.2.30) is outdated (learn more)
+./src/services/userBookmarkService.ts
+Error: 
+  × Expected ';', '}' or <eof>
+     ╭─[/home/runner/workspace/src/services/userBookmarkService.ts:320:1]
+ 320 │     
+ 321 │     export const userBookmarkService = new UserBookmarkService();
+ 322 │     
+ 323 │ ╭─▶ ```replit_final_file
+ 324 │ │   import { supabase } from '@/lib/supabase';
+ 325 │ │   import { UserBookmark } from '@/lib/supabase';
+ 326 │ │   
+ 327 │ │   class UserBookmarkService {
+ 328 │ │     private async getAuthToken(): Promise<string | null> {
+ 329 │ │       try {
+ 330 │ │         const { data: { session } } = await supabase.auth.getSession();
+ 331 │ │         return session?.access_token || null;
+ 332 │ │       } catch (error) {
+ 333 │ │         console.error('Error getting auth token:', error);
+ 334 │ │         return null;
+ 335 │ │       }
+ 336 │ │     }
+ 337 │ │   
+ 338 │ │     // Get user bookmarks using API layer
+ 339 │ │     async getUserBookmarks(userId: string): Promise<UserBookmark[]> {
+ 340 │ │       try {
+ 341 │ │         const { getCachedAuthState } = await import('@/lib/supabase');
+ 342 │ │         const { session } = await getCachedAuthState();
+ 343 │ │         if (!session?.user || session.user.id !== userId) {
+ 344 │ │           throw new Error('Unauthorized');
+ 345 │ │         }
+ 346 │ │   
+ 347 │ │         // Check if we're on client side
+ 348 │ │         if (typeof window !== 'undefined') {
+ 349 │ │           const token = await this.getAuthToken();
+ 350 │ │           if (!token) {
+ 351 │ │             console.error('No auth token available for bookmarks');
+ 352 │ │             return [];
+ 353 │ │           }
+ 354 │ │   
+ 355 │ │           const response = await fetch('/api/user/bookmarks/', {
+ 356 │ │             method: 'GET',
+ 357 │ │             headers: {
+ 358 │ ├─▶             'Authorization': `Bearer ${token}`,
+     · ╰───                              ──────
+     · ╰──── This is the expression part of an expression statement
+ 359 │                 'Content-Type': 'application/json',
+ 360 │               },
+ 361 │             });
+     ╰────
+
+Caused by:
+    Syntax Error

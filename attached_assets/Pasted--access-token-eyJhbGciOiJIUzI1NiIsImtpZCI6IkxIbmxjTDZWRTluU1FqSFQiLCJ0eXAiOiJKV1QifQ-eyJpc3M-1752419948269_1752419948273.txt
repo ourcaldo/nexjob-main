@@ -1,0 +1,49 @@
+{
+  "access_token": "eyJhbGciOiJIUzI1NiIsImtpZCI6IkxIbmxjTDZWRTluU1FqSFQiLCJ0eXAiOiJKV1QifQ.eyJpc3MiOiJodHRwczovL3V6bHp5b3NtYnhnZ2hobWFmaWRrLnN1cGFiYXNlLmNvL2F1dGgvdjEiLCJzdWIiOiI5MTY5NDZhZi1lZWU2LTQwNWMtYmM4Ny1iMmIyOGViMDQyNWEiLCJhdWQiOiJhdXRoZW50aWNhdGVkIiwiZXhwIjoxNzUyNDIzNDE1LCJpYXQiOjE3NTI0MTk4MTUsImVtYWlsIjoiYWxkb2RrcmlzQGdtYWlsLmNvbSIsInBob25lIjoiIiwiYXBwX21ldGFkYXRhIjp7InByb3ZpZGVyIjoiZW1haWwiLCJwcm92aWRlcnMiOlsiZW1haWwiXX0sInVzZXJfbWV0YWRhdGEiOnsiZW1haWxfdmVyaWZpZWQiOnRydWUsInJvbGUiOiJzdXBlcl9hZG1pbiJ9LCJyb2xlIjoiYXV0aGVudGljYXRlZCIsImFhbCI6ImFhbDEiLCJhbXIiOlt7Im1ldGhvZCI6InBhc3N3b3JkIiwidGltZXN0YW1wIjoxNzUyNDE5ODE1fV0sInNlc3Npb25faWQiOiIzZmIzMmY1YS02ZDc2LTQyNjQtYjBiMC1hNmU0MDM2ZWJmNjAiLCJpc19hbm9ueW1vdXMiOmZhbHNlfQ.MblgSQ_vPdcbxilKxftvvRfgaBlWXKHeAzuAkjvmlsQ",
+  "token_type": "bearer",
+  "expires_in": 3600,
+  "expires_at": 1752423415,
+  "refresh_token": "7de43papvtfy",
+  "user": {
+    "id": "916946af-eee6-405c-bc87-b2b28eb0425a",
+    "aud": "authenticated",
+    "role": "authenticated",
+    "email": "aldodkris@gmail.com",
+    "email_confirmed_at": "2025-07-02T08:44:29.579755Z",
+    "phone": "",
+    "confirmed_at": "2025-07-02T08:44:29.579755Z",
+    "recovery_sent_at": "2025-07-02T09:40:37.295464Z",
+    "last_sign_in_at": "2025-07-13T15:16:55.106525687Z",
+    "app_metadata": {
+      "provider": "email",
+      "providers": [
+        "email"
+      ]
+    },
+    "user_metadata": {
+      "email_verified": true,
+      "role": "super_admin"
+    },
+    "identities": [
+      {
+        "identity_id": "beb048d7-d884-4fa4-adaa-670ba416173d",
+        "id": "916946af-eee6-405c-bc87-b2b28eb0425a",
+        "user_id": "916946af-eee6-405c-bc87-b2b28eb0425a",
+        "identity_data": {
+          "email": "aldodkris@gmail.com",
+          "email_verified": false,
+          "phone_verified": false,
+          "sub": "916946af-eee6-405c-bc87-b2b28eb0425a"
+        },
+        "provider": "email",
+        "last_sign_in_at": "2025-07-02T08:44:29.577115Z",
+        "created_at": "2025-07-02T08:44:29.577171Z",
+        "updated_at": "2025-07-02T08:44:29.577171Z",
+        "email": "aldodkris@gmail.com"
+      }
+    ],
+    "created_at": "2025-07-02T08:44:29.572663Z",
+    "updated_at": "2025-07-13T15:16:55.109005Z",
+    "is_anonymous": false
+  }
+}

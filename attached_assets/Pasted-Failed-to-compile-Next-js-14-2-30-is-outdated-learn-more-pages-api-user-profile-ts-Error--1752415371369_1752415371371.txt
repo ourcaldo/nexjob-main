@@ -1,0 +1,305 @@
+Failed to compile
+
+Next.js (14.2.30) is outdated (learn more)
+./pages/api/user/profile.ts
+Error: 
+  × the name `createServerSupabaseClient` is defined multiple times
+    ╭─[/home/runner/workspace/pages/api/user/profile.ts:1:1]
+  1 │ 
+  2 │ import { NextApiRequest, NextApiResponse } from 'next';
+  3 │ import { createServerSupabaseClient } from '@/lib/supabase';
+    ·          ─────────────┬────────────
+    ·                       ╰── previous definition of `createServerSupabaseClient` here
+  4 │ 
+  5 │ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  6 │   if (req.method !== 'GET') {
+  7 │     return res.status(405).json({ error: 'Method not allowed' });
+  8 │   }
+  9 │ 
+ 10 │   try {
+ 11 │     const supabase = createServerSupabaseClient();
+ 12 │     
+ 13 │     // Get user from authorization header
+ 14 │     const authHeader = req.headers.authorization;
+ 15 │     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+ 16 │       return res.status(401).json({ error: 'No authorization token provided' });
+ 17 │     }
+ 18 │ 
+ 19 │     const token = authHeader.replace('Bearer ', '');
+ 20 │     
+ 21 │     // Verify the session token with Supabase
+ 22 │     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+ 23 │     
+ 24 │     if (authError || !user) {
+ 25 │       return res.status(401).json({ error: 'Invalid session token' });
+ 26 │     }
+ 27 │ 
+ 28 │     // Get user profile data
+ 29 │     const { data: profile, error: profileError } = await supabase
+ 30 │       .from('profiles')
+ 31 │       .select('*')
+ 32 │       .eq('id', user.id)
+ 33 │       .single();
+ 34 │ 
+ 35 │     if (profileError) {
+ 36 │       console.error('Error fetching user profile:', profileError);
+ 37 │       return res.status(500).json({ error: 'Failed to fetch user profile' });
+ 38 │     }
+ 39 │ 
+ 40 │     if (!profile) {
+ 41 │       return res.status(404).json({ error: 'User profile not found' });
+ 42 │     }
+ 43 │ 
+ 44 │     // Return profile data
+ 45 │     res.status(200).json({
+ 46 │       success: true,
+ 47 │       data: profile
+ 48 │     });
+ 49 │ 
+ 50 │   } catch (error) {
+ 51 │     console.error('Error in user profile API:', error);
+ 52 │     res.status(500).json({ 
+ 53 │       error: 'Internal server error',
+ 54 │       message: error instanceof Error ? error.message : 'Unknown error'
+ 55 │     });
+ 56 │   }
+ 57 │ }
+ 58 │ import { NextApiRequest, NextApiResponse } from 'next';
+ 59 │ import { createServerSupabaseClient } from '@/lib/supabase';
+    ·          ─────────────┬────────────
+    ·                       ╰── `createServerSupabaseClient` redefined here
+ 60 │ 
+ 61 │ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+ 62 │   if (!['GET', 'PUT'].includes(req.method || '')) {
+    ╰────
+
+  × the name `handler` is defined multiple times
+    ╭─[/home/runner/workspace/pages/api/user/profile.ts:2:1]
+  2 │ import { NextApiRequest, NextApiResponse } from 'next';
+  3 │ import { createServerSupabaseClient } from '@/lib/supabase';
+  4 │ 
+  5 │ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    ·                               ───┬───
+    ·                                  ╰── previous definition of `handler` here
+  6 │   if (req.method !== 'GET') {
+  7 │     return res.status(405).json({ error: 'Method not allowed' });
+  8 │   }
+  9 │ 
+ 10 │   try {
+ 11 │     const supabase = createServerSupabaseClient();
+ 12 │     
+ 13 │     // Get user from authorization header
+ 14 │     const authHeader = req.headers.authorization;
+ 15 │     if (!authHeader || !authHeader.startsWith('Bearer ')) {
+ 16 │       return res.status(401).json({ error: 'No authorization token provided' });
+ 17 │     }
+ 18 │ 
+ 19 │     const token = authHeader.replace('Bearer ', '');
+ 20 │     
+ 21 │     // Verify the session token with Supabase
+ 22 │     const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+ 23 │     
+ 24 │     if (authError || !user) {
+ 25 │       return res.status(401).json({ error: 'Invalid session token' });
+ 26 │     }
+ 27 │ 
+ 28 │     // Get user profile data
+ 29 │     const { data: profile, error: profileError } = await supabase
+ 30 │       .from('profiles')
+ 31 │       .select('*')
+ 32 │       .eq('id', user.id)
+ 33 │       .single();
+ 34 │ 
+ 35 │     if (profileError) {
+ 36 │       console.error('Error fetching user profile:', profileError);
+ 37 │       return res.status(500).json({ error: 'Failed to fetch user profile' });
+ 38 │     }
+ 39 │ 
+ 40 │     if (!profile) {
+ 41 │       return res.status(404).json({ error: 'User profile not found' });
+ 42 │     }
+ 43 │ 
+ 44 │     // Return profile data
+ 45 │     res.status(200).json({
+ 46 │       success: true,
+ 47 │       data: profile
+ 48 │     });
+ 49 │ 
+ 50 │   } catch (error) {
+ 51 │     console.error('Error in user profile API:', error);
+ 52 │     res.status(500).json({ 
+ 53 │       error: 'Internal server error',
+ 54 │       message: error instanceof Error ? error.message : 'Unknown error'
+ 55 │     });
+ 56 │   }
+ 57 │ }
+ 58 │ import { NextApiRequest, NextApiResponse } from 'next';
+ 59 │ import { createServerSupabaseClient } from '@/lib/supabase';
+ 60 │ 
+ 61 │ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+    ·                               ───┬───
+    ·                                  ╰── `handler` redefined here
+ 62 │   if (!['GET', 'PUT'].includes(req.method || '')) {
+ 63 │     return res.status(405).json({ error: 'Method not allowed' });
+ 64 │   }
+    ╰────
+
+  × the name `default` is exported multiple times
+     ╭─[/home/runner/workspace/pages/api/user/profile.ts:2:1]
+   2 │     import { NextApiRequest, NextApiResponse } from 'next';
+   3 │     import { createServerSupabaseClient } from '@/lib/supabase';
+   4 │     
+   5 │ ╭─▶ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+   6 │ │     if (req.method !== 'GET') {
+   7 │ │       return res.status(405).json({ error: 'Method not allowed' });
+   8 │ │     }
+   9 │ │   
+  10 │ │     try {
+  11 │ │       const supabase = createServerSupabaseClient();
+  12 │ │       
+  13 │ │       // Get user from authorization header
+  14 │ │       const authHeader = req.headers.authorization;
+  15 │ │       if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  16 │ │         return res.status(401).json({ error: 'No authorization token provided' });
+  17 │ │       }
+  18 │ │   
+  19 │ │       const token = authHeader.replace('Bearer ', '');
+  20 │ │       
+  21 │ │       // Verify the session token with Supabase
+  22 │ │       const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  23 │ │       
+  24 │ │       if (authError || !user) {
+  25 │ │         return res.status(401).json({ error: 'Invalid session token' });
+  26 │ │       }
+  27 │ │   
+  28 │ │       // Get user profile data
+  29 │ │       const { data: profile, error: profileError } = await supabase
+  30 │ │         .from('profiles')
+  31 │ │         .select('*')
+  32 │ │         .eq('id', user.id)
+  33 │ │         .single();
+  34 │ │   
+  35 │ │       if (profileError) {
+  36 │ │         console.error('Error fetching user profile:', profileError);
+  37 │ │         return res.status(500).json({ error: 'Failed to fetch user profile' });
+  38 │ │       }
+  39 │ │   
+  40 │ │       if (!profile) {
+  41 │ │         return res.status(404).json({ error: 'User profile not found' });
+  42 │ │       }
+  43 │ │   
+  44 │ │       // Return profile data
+  45 │ │       res.status(200).json({
+  46 │ │         success: true,
+  47 │ │         data: profile
+  48 │ │       });
+  49 │ │   
+  50 │ │     } catch (error) {
+  51 │ │       console.error('Error in user profile API:', error);
+  52 │ │       res.status(500).json({ 
+  53 │ │         error: 'Internal server error',
+  54 │ │         message: error instanceof Error ? error.message : 'Unknown error'
+  55 │ │       });
+  56 │ │     }
+  57 │ ├─▶ }
+     · ╰──── previous exported here
+  58 │     import { NextApiRequest, NextApiResponse } from 'next';
+  59 │     import { createServerSupabaseClient } from '@/lib/supabase';
+  60 │     
+  61 │ ╭─▶ export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+  62 │ │     if (!['GET', 'PUT'].includes(req.method || '')) {
+  63 │ │       return res.status(405).json({ error: 'Method not allowed' });
+  64 │ │     }
+  65 │ │   
+  66 │ │     try {
+  67 │ │       const supabase = createServerSupabaseClient();
+  68 │ │       
+  69 │ │       // Get user from authorization header
+  70 │ │       const authHeader = req.headers.authorization;
+  71 │ │       if (!authHeader || !authHeader.startsWith('Bearer ')) {
+  72 │ │         return res.status(401).json({ error: 'No authorization token provided' });
+  73 │ │       }
+  74 │ │   
+  75 │ │       const token = authHeader.replace('Bearer ', '');
+  76 │ │       
+  77 │ │       // Verify the session token with Supabase
+  78 │ │       const { data: { user }, error: authError } = await supabase.auth.getUser(token);
+  79 │ │       
+  80 │ │       if (authError || !user) {
+  81 │ │         return res.status(401).json({ error: 'Invalid session token' });
+  82 │ │       }
+  83 │ │   
+  84 │ │       if (req.method === 'GET') {
+  85 │ │         // Get user profile data
+  86 │ │         const { data: profile, error: profileError } = await supabase
+  87 │ │           .from('profiles')
+  88 │ │           .select('*')
+  89 │ │           .eq('id', user.id)
+  90 │ │           .single();
+  91 │ │   
+  92 │ │         if (profileError) {
+  93 │ │           console.error('Error fetching user profile:', profileError);
+  94 │ │           return res.status(500).json({ error: 'Failed to fetch user profile' });
+  95 │ │         }
+  96 │ │   
+  97 │ │         if (!profile) {
+  98 │ │           return res.status(404).json({ error: 'User profile not found' });
+  99 │ │         }
+ 100 │ │   
+ 101 │ │         // Return profile data
+ 102 │ │         res.status(200).json({
+ 103 │ │           success: true,
+ 104 │ │           data: profile
+ 105 │ │         });
+ 106 │ │       } else if (req.method === 'PUT') {
+ 107 │ │         // Update user profile
+ 108 │ │         const profileData = req.body;
+ 109 │ │         
+ 110 │ │         // Remove sensitive fields that shouldn't be updated through this endpoint
+ 111 │ │         const allowedFields = [
+ 112 │ │           'full_name', 'phone', 'birth_date', 'gender', 
+ 113 │ │           'location', 'photo_url', 'bio'
+ 114 │ │         ];
+ 115 │ │         
+ 116 │ │         const updateData: any = {};
+ 117 │ │         for (const field of allowedFields) {
+ 118 │ │           if (profileData[field] !== undefined) {
+ 119 │ │             updateData[field] = profileData[field];
+ 120 │ │           }
+ 121 │ │         }
+ 122 │ │   
+ 123 │ │         if (Object.keys(updateData).length === 0) {
+ 124 │ │           return res.status(400).json({ error: 'No valid fields to update' });
+ 125 │ │         }
+ 126 │ │   
+ 127 │ │         const { data: updatedProfile, error: updateError } = await supabase
+ 128 │ │           .from('profiles')
+ 129 │ │           .update(updateData)
+ 130 │ │           .eq('id', user.id)
+ 131 │ │           .select('*')
+ 132 │ │           .single();
+ 133 │ │   
+ 134 │ │         if (updateError) {
+ 135 │ │           console.error('Error updating user profile:', updateError);
+ 136 │ │           return res.status(500).json({ error: 'Failed to update user profile' });
+ 137 │ │         }
+ 138 │ │   
+ 139 │ │         res.status(200).json({
+ 140 │ │           success: true,
+ 141 │ │           data: updatedProfile
+ 142 │ │         });
+ 143 │ │       }
+ 144 │ │   
+ 145 │ │     } catch (error) {
+ 146 │ │       console.error('Error in user profile API:', error);
+ 147 │ │       res.status(500).json({ 
+ 148 │ │         error: 'Internal server error',
+ 149 │ │         message: error instanceof Error ? error.message : 'Unknown error'
+ 150 │ │       });
+ 151 │ │     }
+ 152 │ ├─▶ }
+     · ╰──── exported more than once
+     ╰────
+
+Error: 
+  ☞ Exported identifiers must be unique

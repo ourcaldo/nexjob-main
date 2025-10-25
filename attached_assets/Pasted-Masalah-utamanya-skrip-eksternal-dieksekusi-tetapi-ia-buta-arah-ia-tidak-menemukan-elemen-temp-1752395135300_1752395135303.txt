@@ -1,0 +1,73 @@
+Masalah utamanya: skrip eksternal dieksekusi, tetapi ia “buta arah” — ia tidak menemukan elemen tempat ia seharusnya menempel, sehingga tampak seperti tidak berjalan sama sekali.
+Banyak library iklan (termasuk script “analytics.js”‐mu) memakai logika ini:
+
+js
+Copy
+Edit
+const slot = document.currentScript.parentNode; // ← di sinilah iklan akan ditempel
+Ketika <script>‑nya Anda “pindahkan” ke <head> dan kontainer yang asli diset display:none, document.currentScript.parentNode mengarah ke <head> (atau bahkan null). Alhasil library langsung berhenti tanpa mem‑render apa pun.  
+Stack Overflow
+
+Cara cepat memperbaikinya
+Sisipkan skrip di posisi yang sama (tempel di dalam div tempat iklan muncul, bukan di <head>).
+
+Jangan sembunyikan kontainernya (hilangkan display:none; biarkan skrip yang memutuskan kapan popup muncul).
+
+Pertahankan urutan eksekusi: eksternal dulu, lalu inline, persis seperti markup asli.
+
+Berikut versi minimal yang biasa saya pakai di React; cukup ganti seluruh blok efek keduamu:
+
+tsx
+Copy
+Edit
+useEffect(() => {
+  if (!adCode) return;
+
+  // 1. Buat div penampung (tidak disembunyikan)
+  const wrapper = document.createElement('div');
+  document.body.appendChild(wrapper);
+
+  // 2. Masukkan HTML mentahnya
+  wrapper.innerHTML = adCode;
+
+  // 3. Re‑hydrate semua <script> satu per satu
+  wrapper.querySelectorAll('script').forEach(oldScript => {
+    const s = document.createElement('script');
+
+    // Salin semua atribut
+    [...oldScript.attributes].forEach(attr =>
+      s.setAttribute(attr.name, attr.value)
+    );
+
+    if (oldScript.src) {
+      // Tambah cache‑buster bila mau
+      s.src =
+        oldScript.src +
+        (oldScript.src.includes('?') ? '&' : '?') +
+        'v=' +
+        Date.now();
+    } else {
+      s.text = oldScript.textContent || '';
+    }
+
+    oldScript.replaceWith(s); // ganti node lama → yang baru (trig­ger eksekusi)
+  });
+
+  // 4. Bersihkan saat komponen unmount
+  return () => wrapper.remove();
+}, [adCode]);
+Kenapa pendekatan ini berhasil?
+Hal	Pendekatan lama	Pendekatan baru
+Lokasi <script>	Dipindah ke <head>	Tetap di posisi semula
+document.currentScript.parentNode	<head> atau null	<div> wrapper
+Kontainer	display:none	Terlihat (skrip boleh menyembunyikan sendiri)
+Eksekusi inline	Menunggu load semua eksternal → eval	Terjaga urutannya secara alami
+
+Catatan tambahan
+Tidak ada JavaScript di dalam atribut src. Jika Anda benar‑benar ingin hard‑code versi tertentu, cukup tulis ...analytics.js?v=20250713. Dinamis? Tambah query param seperti contoh di atas.
+
+Bila library memanggil fungsi global (misalnya window.analytics.init()), pastikan Anda mengeksekusinya di callback onload terakhir.
+
+Kalau CSP (Content‑Security‑Policy) aktif, pastikan domain oncloud.web.id diizinkan.
+
+Coba terapkan perubahan di atas; biasanya popup langsung muncul begitu skrip menemukan “rumahnya”. Jika masih ada yang macet, kirim log konsol setelah perbaikan, kita bedah lagi bareng‑bareng.

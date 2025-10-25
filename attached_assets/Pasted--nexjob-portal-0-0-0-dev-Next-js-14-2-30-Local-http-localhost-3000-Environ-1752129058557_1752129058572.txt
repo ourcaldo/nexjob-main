@@ -1,0 +1,71 @@
+> nexjob-portal@0.0.0 dev
+  ▲ Next.js 14.2.30
+  - Local:        http://localhost:3000
+  - Environments: .env.local, .env
+
+ ✓ Starting...
+ ✓ Ready in 2.7s
+ ⚠ Cross origin request detected from 38469687-4cf9-43dc-b2c6-798c83dc15d6-00-112c6mdfca1po.sisko.replit.dev to /_next/* resource. In a future major version of Next.js, you will need to explicitly configure "allowedDevOrigins" in next.config to allow this.
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ ○ Compiling /_error ...
+ ✓ Compiled /artikel in 10.3s (595 modules)
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 10532ms
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 7553ms
+ GET /backend/admin/sitemap/ 200 in 10657ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 11ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ○ Compiling / ...
+ ✓ Compiled / in 1084ms (633 modules)
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 824ms
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 526ms
+ GET /backend/admin/sitemap/ 200 in 1111ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 8ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1307ms
+ GET /backend/admin/sitemap/ 200 in 17ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET / 200 in 1137ms
+Fetching fresh filter data (cache expired or not found)
+ GET /_next/data/development/artikel.json 200 in 1390ms
+Filter data cached for 1 hour (ISR-like behavior)
+ GET / 200 in 2438ms
+ GET / 200 in 2344ms
+ GET /_next/static/webpack/bcd2747ad217af3f.webpack.hot-update.json 404 in 11ms
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ ⚠ Fast Refresh had to perform a full reload. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+ GET /_next/data/development/artikel.json 200 in 507ms
+ ○ Compiling /backend/admin/cms ...
+ ✓ Compiled /backend/admin/cms in 1315ms (654 modules)
+ GET /_next/data/development/backend/admin/cms.json 200 in 43ms
+ GET /_next/data/development/backend/admin/sitemap.json 200 in 29ms
+ ○ Compiling /sitemap-loker.xml ...
+ ✓ Compiled /sitemap-loker.xml in 1726ms (657 modules)
+Generating fresh loker directory sitemap
+Error generating loker directory sitemap: TypeError: this.isCacheValid is not a function
+    at SitemapService.getAllSitemapData (webpack-internal:///./src/services/sitemapService.ts:507:24)
+    at SitemapService.generateLokerDirectorySitemap (webpack-internal:///./src/services/sitemapService.ts:102:41)
+    at async getServerSideProps (webpack-internal:///./pages/sitemap-loker.xml.tsx:12:25)
+ GET /sitemap-loker.xml 500 in 1829ms
+ ✓ Compiled /sitemap-artikel/[page] in 382ms (661 modules)
+No cached article chunk found for page 1
+No cached chunk found for page 1, fetching fresh data...
+Error generating artikel sitemap: TypeError: this.isCacheValid is not a function
+    at SitemapService.getAllSitemapData (webpack-internal:///./src/services/sitemapService.ts:507:24)
+    at getServerSideProps (webpack-internal:///./pages/sitemap-artikel/[page].tsx:29:109)
+    at async e8 (/home/runner/workspace/node_modules/next/dist/compiled/next-server/pages.runtime.dev.js:25:124)
+    at async doRender (/home/runner/workspace/node_modules/next/dist/server/base-server.js:1414:30)
+    at async cacheEntry.responseCache.get.routeKind (/home/runner/workspace/node_modules/next/dist/server/base-server.js:1588:28)
+    at async DevServer.renderToResponseWithComponentsImpl (/home/runner/workspace/node_modules/next/dist/server/base-server.js:1496:28)
+    at async DevServer.renderPageComponent (/home/runner/workspace/node_modules/next/dist/server/base-server.js:1924:24)
+    at async DevServer.renderToResponseImpl (/home/runner/workspace/node_modules/next/dist/server/base-server.js:1962:32)
+    at async DevServer.pipeImpl (/home/runner/workspace/node_modules/next/dist/server/base-server.js:922:25)
+    at async NextNodeServer.handleCatchallRenderRequest (/home/runner/workspace/node_modules/next/dist/server/next-server.js:272:17)
+    at async DevServer.handleRequestImpl (/home/runner/workspace/node_modules/next/dist/server/base-server.js:818:17)
+    at async /home/runner/workspace/node_modules/next/dist/server/dev/next-dev-server.js:339:20
+    at async Span.traceAsyncFn (/home/runner/workspace/node_modules/next/dist/trace/trace.js:154:20)
+    at async DevServer.handleRequest (/home/runner/workspace/node_modules/next/dist/server/dev/next-dev-server.js:336:24)
+    at async invokeRender (/home/runner/workspace/node_modules/next/dist/server/lib/router-server.js:179:21)
+ GET /sitemap-artikel-1.xml 500 in 475ms

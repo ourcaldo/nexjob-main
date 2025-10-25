@@ -1,0 +1,328 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Rich Text Content Styles for Frontend */
+.cms-content h1, .cms-content h2, .cms-content h3, 
+.cms-content h4, .cms-content h5, .cms-content h6 {
+  font-weight: bold !important;
+  margin: 0.5em 0 !important;
+  color: #1f2937 !important;
+  line-height: 1.2 !important;
+}
+
+.cms-content h1 {
+  font-size: 2.25rem !important;
+  margin: 0.67em 0 !important;
+}
+
+.cms-content h2 {
+  font-size: 1.875rem !important;
+  margin: 0.75em 0 !important;
+}
+
+.cms-content h3 {
+  font-size: 1.5rem !important;
+  margin: 0.83em 0 !important;
+}
+
+.cms-content h4 {
+  font-size: 1.25rem !important;
+  margin: 1.12em 0 !important;
+}
+
+.cms-content h5 {
+  font-size: 1.125rem !important;
+  margin: 1.5em 0 !important;
+}
+
+.cms-content h6 {
+  font-size: 1rem !important;
+  margin: 1.67em 0 !important;
+}
+
+.cms-content p {
+  margin: 1em 0 !important;
+  line-height: 1.6 !important;
+  color: #374151 !important;
+}
+
+.cms-content ul, .cms-content ol {
+  margin: 1em 0 !important;
+  padding-left: 2em !important;
+}
+
+.cms-content ul {
+  list-style-type: disc !important;
+}
+
+.cms-content ol {
+  list-style-type: decimal !important;
+}
+
+.cms-content li {
+  margin: 0.25em 0 !important;
+  line-height: 1.6 !important;
+}
+
+.cms-content blockquote {
+  margin: 1.5em 0 !important;
+  padding: 1em 1.5em !important;
+  border-left: 4px solid #e5e7eb !important;
+  background-color: #f9fafb !important;
+  font-style: italic !important;
+  color: #6b7280 !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
+.cms-content pre {
+  font-family: 'Courier New', Consolas, Monaco, monospace !important;
+  white-space: pre !important;
+  margin: 1.5em 0 !important;
+  padding: 1em !important;
+  background: #f3f4f6 !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 0.375rem !important;
+  overflow-x: auto !important;
+  font-size: 0.875rem !important;
+}
+
+.cms-content code {
+  font-family: 'Courier New', Consolas, Monaco, monospace !important;
+  background: #f3f4f6 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875rem !important;
+  color: #dc2626 !important;
+}
+
+.cms-content pre code {
+  background: none !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  color: #374151 !important;
+}
+
+.cms-content strong, .cms-content b {
+  font-weight: 700 !important;
+}
+
+.cms-content em, .cms-content i {
+  font-style: italic !important;
+}
+
+.cms-content u {
+  text-decoration: underline !important;
+}
+
+.cms-content a {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+.cms-content a:hover {
+  color: #1d4ed8 !important;
+}
+
+.cms-content img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 1em 0 !important;
+  border-radius: 0.375rem !important;
+}
+
+/* Tiptap class compatibility */
+.cms-content .tiptap-heading {
+  font-weight: bold !important;
+  margin: 0.5em 0 !important;
+  color: #1f2937 !important;
+}
+
+.cms-content h1.tiptap-heading {
+  font-size: 2.25rem !important;
+  margin: 0.67em 0 !important;
+}
+
+.cms-content h2.tiptap-heading {
+  font-size: 1.875rem !important;
+  margin: 0.75em 0 !important;
+}
+
+.cms-content h3.tiptap-heading {
+  font-size: 1.5rem !important;
+  margin: 0.83em 0 !important;
+}
+
+.cms-content h4.tiptap-heading {
+  font-size: 1.25rem !important;
+  margin: 1.12em 0 !important;
+}
+
+.cms-content h5.tiptap-heading {
+  font-size: 1.125rem !important;
+  margin: 1.5em 0 !important;
+}
+
+.cms-content h6.tiptap-heading {
+  font-size: 1rem !important;
+  margin: 1.67em 0 !important;
+}
+
+.cms-content .tiptap-paragraph {
+  margin: 1em 0 !important;
+  line-height: 1.6 !important;
+}
+
+.cms-content .tiptap-bold {
+  font-weight: 700 !important;
+}
+
+.cms-content .tiptap-italic {
+  font-style: italic !important;
+}
+
+.cms-content .tiptap-underline {
+  text-decoration: underline !important;
+}
+
+.cms-content .tiptap-strike {
+  text-decoration: line-through !important;
+}
+
+.cms-content .tiptap-code {
+  font-family: 'Courier New', Consolas, Monaco, monospace !important;
+  background: #f3f4f6 !important;
+  padding: 0.125rem 0.25rem !important;
+  border-radius: 0.25rem !important;
+  font-size: 0.875rem !important;
+  color: #dc2626 !important;
+}
+
+.cms-content .tiptap-code-block {
+  font-family: 'Courier New', Consolas, Monaco, monospace !important;
+  background: #f3f4f6 !important;
+  padding: 1rem !important;
+  border-radius: 0.375rem !important;
+  margin: 1.5rem 0 !important;
+  border: 1px solid #d1d5db !important;
+  color: #374151 !important;
+  white-space: pre !important;
+  overflow-x: auto !important;
+}
+
+.cms-content .tiptap-blockquote {
+  border-left: 4px solid #e5e7eb !important;
+  padding: 1rem 1.5rem !important;
+  margin: 1.5rem 0 !important;
+  font-style: italic !important;
+  color: #6b7280 !important;
+  background-color: #f9fafb !important;
+  border-radius: 0 0.375rem 0.375rem 0 !important;
+}
+
+.cms-content .tiptap-bullet-list,
+.cms-content .tiptap-ordered-list {
+  margin: 1em 0 !important;
+  padding-left: 2em !important;
+}
+
+.cms-content .tiptap-bullet-list {
+  list-style-type: disc !important;
+}
+
+.cms-content .tiptap-ordered-list {
+  list-style-type: decimal !important;
+}
+
+.cms-content .tiptap-list-item {
+  margin: 0.25em 0 !important;
+  line-height: 1.6 !important;
+}
+
+.cms-content .tiptap-link {
+  color: #2563eb !important;
+  text-decoration: underline !important;
+}
+
+.cms-content .tiptap-link:hover {
+  color: #1d4ed8 !important;
+}
+
+.cms-content .tiptap-image {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  margin: 1em 0 !important;
+  border-radius: 0.375rem !important;
+}
+
+/* Additional responsive typography */
+@media (max-width: 768px) {
+  .cms-content h1, .cms-content h1.tiptap-heading {
+    font-size: 1.875rem !important;
+  }
+
+  .cms-content h2, .cms-content h2.tiptap-heading {
+    font-size: 1.5rem !important;
+  }
+
+  .cms-content h3, .cms-content h3.tiptap-heading {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Custom scrollbar styles */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Advertisement containment styles */
+.ad-content-container {
+  max-width: 100% !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  box-sizing: border-box !important;
+}
+
+.ad-content-container * {
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  box-sizing: border-box !important;
+}
+
+.ad-content-container iframe,
+.ad-content-container img,
+.ad-content-container video,
+.ad-content-container object,
+.ad-content-container embed {
+  max-width: 100% !important;
+  width: 100% !important;
+  height: auto !important;
+}
+
+/* Sidebar advertisement specific styles */
+.advertisement-sidebar_archive_ad_code .ad-content-container,
+.advertisement-sidebar_single_ad_code .ad-content-container {
+  max-width: 300px !important;
+  width: 100% !important;
+}
+
+.advertisement-sidebar_archive_ad_code .ad-content-container *,
+.advertisement-sidebar_single_ad_code .ad-content-container * {
+  max-width: 300px !important;
+}

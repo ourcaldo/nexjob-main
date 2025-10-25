@@ -1,0 +1,31 @@
+~/workspace$ npm run build
+
+> nexjob-portal@0.0.0 build
+> next build
+
+  ▲ Next.js 14.2.30
+  - Environments: .env.local, .env
+
+
+./src/components/admin/SEOSettings.tsx
+332:13  Warning: Image elements must have an alt prop, either with meaningful text, or an empty string for decorative images.  jsx-a11y/alt-text
+
+info  - Need to disable some ESLint rules? Learn more here: https://nextjs.org/docs/basic-features/eslint#disabling-rules
+   Linting and checking validity of types  ...Failed to compile.
+
+./src/components/pages/ProfilePage.tsx:193:18
+Type error: Argument of type '(prev: Profile | null) => { full_name: string; phone: string; birth_date: string; gender: string; location: string; bio: string; id: string; email: string; photo_url?: string | null | undefined; role: "user" | "super_admin"; created_at: string; } | null' is not assignable to parameter of type 'SetStateAction<Profile | null>'.
+  Type '(prev: Profile | null) => { full_name: string; phone: string; birth_date: string; gender: string; location: string; bio: string; id: string; email: string; photo_url?: string | null | undefined; role: "user" | "super_admin"; created_at: string; } | null' is not assignable to type '(prevState: Profile | null) => Profile | null'.
+    Type '{ full_name: string; phone: string; birth_date: string; gender: string; location: string; bio: string; id: string; email: string; photo_url?: string | null | undefined; role: "user" | "super_admin"; created_at: string; } | null' is not assignable to type 'Profile | null'.
+      Type '{ full_name: string; phone: string; birth_date: string; gender: string; location: string; bio: string; id: string; email: string; photo_url?: string | null; role: "user" | "super_admin"; created_at: string; }' is not assignable to type 'Profile'.
+        Types of property 'gender' are incompatible.
+          Type 'string' is not assignable to type '"male" | "female" | "other" | undefined'.
+
+  191 |       }
+  192 |
+> 193 |       setProfile(prev => prev ? { ...prev, ...formData } : null);
+      |                  ^
+  194 |       showToast('success', 'Profil berhasil disimpan');
+  195 |     } catch (error) {
+  196 |       console.error('Error saving profile:', error);
+Next.js build worker exited with code: 1 and signal: null
